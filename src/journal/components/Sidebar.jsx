@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
@@ -13,6 +15,8 @@ import Typography from '@mui/material/Typography';
 import TurnedInNot from '@mui/icons-material/TurnedInNot';
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
+  const { displayName } = useSelector(({ auth }) => auth);
+
   return (
     <Box component="nav" width={{ sm: drawerWidth }} flexShrink={{ sm: 0 }}>
       <Drawer
@@ -25,7 +29,7 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            Nacho
+            {displayName}
           </Typography>
         </Toolbar>
         <Divider />
