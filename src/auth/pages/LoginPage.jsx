@@ -15,11 +15,13 @@ import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
 import { useDispatchAuth } from '../../store/auth';
 
+const formData = {
+  email: '',
+  password: ''
+}
+
 export const LoginPage = () => {
-  const { email, password, formState, handleInputChange } = useForm({
-    email: '',
-    password: ''
-  });
+  const { email, password, formState, handleInputChange } = useForm(formData);
   const { startLogInWithEmailPassword, startGoogleSignIn } = useDispatchAuth();
   const { status, errorMessage } = useSelector(({ auth }) => auth);
   const isCheckingAuthenticating = useMemo(() => status === 'checking', [status]);

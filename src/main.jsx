@@ -7,6 +7,8 @@ import { JournalApp } from './JournalApp';
 import { store } from './store';
 import './styles.css';
 
+import 'sweetalert2/dist/sweetalert2.css';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>

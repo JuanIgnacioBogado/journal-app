@@ -3,19 +3,17 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import TurnedInNot from '@mui/icons-material/TurnedInNot';
+import { SidebarItem } from './';
 
 export const Sidebar = ({ drawerWidth = 240 }) => {
-  const { displayName } = useSelector(({ auth }) => auth);
+  const { notes, displayName } = useSelector(({ journal, auth }) => ({
+    notes: journal.notes,
+    displayName: auth.displayName
+  }));
 
   return (
     <Box component="nav" width={{ sm: drawerWidth }} flexShrink={{ sm: 0 }}>
@@ -35,18 +33,8 @@ export const Sidebar = ({ drawerWidth = 240 }) => {
         <Divider />
 
         <List>
-          {['Enero', 'Febrero', 'Marzo', 'Abril'].map(text => (
-            <ListItem key={text}>
-              <ListItemButton>
-                <ListItemIcon>
-                  <TurnedInNot />
-                </ListItemIcon>
-                <Grid container>
-                  <ListItemText primary={text} />
-                  <ListItemText secondary="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem, laborum!" />
-                </Grid>
-              </ListItemButton>
-            </ListItem>
+          {notes.map(note => (
+            <SidebarItem key={note.id} note={note} />
           ))}
         </List>
       </Drawer>
