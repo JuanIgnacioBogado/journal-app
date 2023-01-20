@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Alert from '@mui/material/Alert';
@@ -13,7 +11,7 @@ import Google from '@mui/icons-material/Google';
 import { AuthLayout } from '../layout/AuthLayout';
 
 import { useForm } from '../../hooks';
-import { useDispatchAuth } from '../../store/auth';
+import { useDispatchAuth, useSelectorAuth } from '../../store/auth';
 
 const formData = {
   email: '',
@@ -23,8 +21,7 @@ const formData = {
 export const LoginPage = () => {
   const { email, password, formState, handleInputChange } = useForm(formData);
   const { startLogInWithEmailPassword, startGoogleSignIn } = useDispatchAuth();
-  const { status, errorMessage } = useSelector(({ auth }) => auth);
-  const isCheckingAuthenticating = useMemo(() => status === 'checking', [status]);
+  const { isCheckingAuthenticating, errorMessage } = useSelectorAuth();
 
   const handleSubmit = e => {
     e.preventDefault();
