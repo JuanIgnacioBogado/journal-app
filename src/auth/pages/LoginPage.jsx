@@ -18,7 +18,7 @@ import { useDispatchAuth } from '../../store/auth';
 const formData = {
   email: '',
   password: ''
-}
+};
 
 export const LoginPage = () => {
   const { email, password, formState, handleInputChange } = useForm(formData);
